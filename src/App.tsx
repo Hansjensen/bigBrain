@@ -79,9 +79,65 @@ export interface User {
   id: number,
 }
 
+const logEntriesData: LogEntry[] = [
+  {
+    id: 1,
+    strain: "OG Kush",
+    grams: 2700,
+    date: new Date("2023-07-27"),
+    logged: false,
+    userId: 101,
+  },
+  {
+    id: 2,
+    strain: "Purple People Eater",
+    grams: 1988,
+    date: new Date("2023-07-26"),
+    logged: true,
+    userId: 102,
+  },
+  
+  {
+    id: 25,
+    strain: "Green Crack",
+    grams: 2500,
+    date: new Date("2023-07-04"),
+    logged: true,
+    userId: 105,
+  },
+
+  {
+    id: 46,
+    strain: "Birthday Cake",
+    grams: 4000,
+    date: new Date("2023-07-03"),
+    logged: true,
+    userId: 105,
+  },
+
+  {
+    id: 64,
+    strain: "Cookies",
+    grams: 4567,
+    date: new Date("2023-07-02"),
+    logged: true,
+    userId: 105,
+  },
+
+  {
+    id: 21,
+    strain: "Diesel",
+    grams: 1000,
+    date: new Date("2023-07-01"),
+    logged: true,
+    userId: 105,
+  },
+];
+
 function App() {
 
   const[selectedBottom, setSelectedBottom] = useState('')
+  const[logEntries, setLogEntries] = useState(logEntriesData)
   
 
   const user = {
@@ -89,60 +145,7 @@ function App() {
     id: 10,
   }
 
-  const logEntries: LogEntry[] = [
-    {
-      id: 1,
-      strain: "OG Kush",
-      grams: 2700,
-      date: new Date("2023-07-27"),
-      logged: false,
-      userId: 101,
-    },
-    {
-      id: 2,
-      strain: "Purple People Eater",
-      grams: 1988,
-      date: new Date("2023-07-26"),
-      logged: true,
-      userId: 102,
-    },
-    
-    {
-      id: 25,
-      strain: "Green Crack",
-      grams: 2500,
-      date: new Date("2023-07-04"),
-      logged: true,
-      userId: 105,
-    },
-
-    {
-      id: 46,
-      strain: "Birthday Cake",
-      grams: 4000,
-      date: new Date("2023-07-03"),
-      logged: true,
-      userId: 105,
-    },
-
-    {
-      id: 64,
-      strain: "Cookies",
-      grams: 4567,
-      date: new Date("2023-07-02"),
-      logged: true,
-      userId: 105,
-    },
-
-    {
-      id: 21,
-      strain: "Diesel",
-      grams: 1000,
-      date: new Date("2023-07-01"),
-      logged: true,
-      userId: 105,
-    },
-  ];
+ 
 
 
   console.log('load')
