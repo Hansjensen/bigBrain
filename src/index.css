@@ -1,9 +1,14 @@
+html {
+  font-size: calc(15px + 0.390625vw);
+}
+
 
 body {
   margin: 0;
   padding: 0;
   min-width: 100vw;
   min-height: 100vh;
+  
 }
 
 :root {
@@ -11,7 +16,10 @@ body {
     --main-black: #000;
     --primary-main: #365544;
     --primary-light: #5f7a6b;
-    --primary-dark: #1b332d:
+    --primary-dark: #1b332d;
+    --secondary-main: #543655;
+    --secondary-light: #7e5080;
+    --secondary-dark: #342035;
   }
   
   

@@ -1,7 +1,7 @@
 import React from "react";
 import { LogEntry } from "../App";
 import '../styles/Entries.css'
-import { Typography, Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 function Entries (props: {logEntries: LogEntry[]}) {
     const {logEntries} = props
@@ -28,10 +28,15 @@ function EntryItem (props: {logEntry: LogEntry}) {
             </div>
             <h2 className="strainTitle">{logEntry.strain}</h2>
         
-        <Typography className="gramsType" >{logEntry.grams + "g"}</Typography>
+            <h4
+            className="gramsType" >
+                {logEntry.grams + "g"}
+            </h4>
+
         <div className="editButtDiv">
-        {logEntry.logged &&
-            <Button>Edit</Button> 
+        
+        {!logEntry.logged &&
+            <Button variant="contained" color="secondary" size="small">Edit</Button> 
         }
         </div>
 

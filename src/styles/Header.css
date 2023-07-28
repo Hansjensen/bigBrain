@@ -1,0 +1,21 @@
+.headerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-light);
+    padding: 0 1rem;
+    color:var(--main-white);
+    width: 100vw;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.logoMain {
+    color:var(--main-white);
+    letter-spacing: -.1rem;
+    -webkit-text-stroke: .5px var(--secondary-main)
+}
+
+.pageCurrent {
+
+}
+

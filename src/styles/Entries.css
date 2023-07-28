@@ -14,8 +14,8 @@
     justify-content: space-between;
     align-items: center;
     margin: 1.3rem 0;
-    padding: .1rem 1.5rem;
-    border: 2px solid var(--primary-main);
+    padding: .1rem .8rem;
+    border: .5px solid var(--primary-main);
     border-left: none;
     border-right: none;
 }
@@ -26,7 +26,7 @@
 }
 
 .dateOutline {
-    border: 3px solid var(--primary-main);
+    border: 3px solid var(--primary-light);
     border-radius: 50%;
     width: 4rem;
     height:4rem;
@@ -34,21 +34,24 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    box-shadow: 1px 1px 5px grey;
 }
 
 .strainTitle {
-    border: 1px solid red;
-    width: 35%;
+   
+    width: 40%;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    color: var(--secondary-dark)
 }
 
 .gramsType {
-    width: 25%;
-    border: 1px solid red;
+    width: 15%;
+    font-weight: 500;
+
 }
 
 .editButtDiv {
-    width: 15%;
+    width: 20%;
 }

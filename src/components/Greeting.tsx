@@ -8,7 +8,7 @@ function Greeting (props: {user: User}) {
 
 
     
-    return  <p>Hello {props.user.userName}! user#:{props.user.id}</p>
+    return  <p>Hello {props.user.userName}!</p>
 
 }
 

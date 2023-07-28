@@ -1,6 +1,6 @@
 
 import './App.css'
-import Greeting from './components/Greeting';
+import Header from './components/Header';
 import React from 'react';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -31,6 +31,18 @@ const LinkBehavior = React.forwardRef<
 });
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#365544',
+      light: '#5f7a6b',
+      dark: '#1b332d',
+    },
+    secondary: {
+      main: '#543655',
+      light: '#7e5080',
+      dark: '#342035',
+    }
+  },
   components: {
     MuiLink: {
       defaultProps: {
@@ -140,7 +152,7 @@ function App() {
     <BrowserRouter>
       <CssBaseline/>
 
-      <Greeting user={user} />
+      <Header user={user} />
       
     
       <Content logEntries={logEntries}/>
