@@ -4,9 +4,8 @@ import Greeting from './components/Greeting';
 import React from 'react';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
-import User from './components/User';
-import AddEntry from './components/AddEntry';
-import Entries from './components/Entries';
+
+import Content from './components/Content';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -17,7 +16,7 @@ import '@fontsource/roboto/700.css';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { AccountCircleOutlined, Add, DocumentScanner } from '@mui/icons-material';
 import {CssBaseline} from '@mui/material';
-import { Link as RouterLink, LinkProps as RouterLinkProps, Routes, Route, Router, BrowserRouter } from 'react-router-dom';
+import { Link as RouterLink, LinkProps as RouterLinkProps, BrowserRouter } from 'react-router-dom';
 import { LinkProps } from '@mui/material/Link';
 
 
@@ -49,8 +48,19 @@ const theme = createTheme({
 
 
 
+console.log('out')
+export interface LogEntry {
+    id: number;
+    strain: string;
+    grams: number;
+    date: Date;
+    logged: boolean;
+    userId: number;
+} 
 
-
+export interface LogEntryProps {
+  entries: LogEntry[];
+}
 
 export interface User {
   userName: string,
@@ -66,6 +76,63 @@ function App() {
     userName: "Hans",
     id: 10,
   }
+
+  const logEntries: LogEntry[] = [
+    {
+      id: 1,
+      strain: "OG Kush",
+      grams: 2700,
+      date: new Date("2023-07-27"),
+      logged: false,
+      userId: 101,
+    },
+    {
+      id: 2,
+      strain: "Purple People Eater",
+      grams: 1988,
+      date: new Date("2023-07-26"),
+      logged: true,
+      userId: 102,
+    },
+    
+    {
+      id: 25,
+      strain: "Green Crack",
+      grams: 2500,
+      date: new Date("2023-07-04"),
+      logged: true,
+      userId: 105,
+    },
+
+    {
+      id: 46,
+      strain: "Birthday Cake",
+      grams: 4000,
+      date: new Date("2023-07-03"),
+      logged: true,
+      userId: 105,
+    },
+
+    {
+      id: 64,
+      strain: "Cookies",
+      grams: 4567,
+      date: new Date("2023-07-02"),
+      logged: true,
+      userId: 105,
+    },
+
+    {
+      id: 21,
+      strain: "Diesel",
+      grams: 1000,
+      date: new Date("2023-07-01"),
+      logged: true,
+      userId: 105,
+    },
+  ];
+
+
   console.log('load')
   return (
     <>
@@ -76,15 +143,7 @@ function App() {
       <Greeting user={user} />
       
     
-        <Routes>
-                  
-          <Route  path="/user" element={<User/>}/>
-                  
-          <Route path="/addentry" element={<AddEntry/>}/>
-            
-          <Route path="/entries" element={<Entries/>} />
-                
-        </Routes>
+      <Content logEntries={logEntries}/>
      
      
       

@@ -6,4 +6,15 @@ body {
   min-height: 100vh;
 }
 
+:root {
+    --main-white: #fff;
+    --main-black: #000;
+    --primary-main: #365544;
+    --primary-light: #5f7a6b;
+    --primary-dark: #1b332d:
+  }
+  
+  
+
+
 
