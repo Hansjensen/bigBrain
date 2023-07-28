@@ -1,5 +1,5 @@
 import Greeting from "./Greeting";
-import { User } from '../App'
+import { User } from '../types/interfaces'
 import "../styles/Header.css"
 
 

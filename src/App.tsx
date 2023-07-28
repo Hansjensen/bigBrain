@@ -19,6 +19,8 @@ import {CssBaseline} from '@mui/material';
 import { Link as RouterLink, LinkProps as RouterLinkProps, BrowserRouter } from 'react-router-dom';
 import { LinkProps } from '@mui/material/Link';
 
+import { LogEntry } from './types/interfaces';
+
 
 
 const LinkBehavior = React.forwardRef<
@@ -61,23 +63,7 @@ const theme = createTheme({
 
 
 console.log('out')
-export interface LogEntry {
-    id: number;
-    strain: string;
-    grams: number;
-    date: Date;
-    logged: boolean;
-    userId: number;
-} 
 
-export interface LogEntryProps {
-  entries: LogEntry[];
-}
-
-export interface User {
-  userName: string,
-  id: number,
-}
 
 const logEntriesData: LogEntry[] = [
   {
@@ -133,17 +119,18 @@ const logEntriesData: LogEntry[] = [
     userId: 105,
   },
 ];
+const userData = {
+  userName: "Hans",
+  id: 10,
+}
 
 function App() {
-
+  const[user, setUser] = useState(userData)
   const[selectedBottom, setSelectedBottom] = useState('')
   const[logEntries, setLogEntries] = useState(logEntriesData)
   
 
-  const user = {
-    userName: "Hans",
-    id: 10,
-  }
+
 
  
 

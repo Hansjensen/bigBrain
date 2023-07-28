@@ -1,5 +1,5 @@
 import React from "react";
-import { LogEntry } from "../App";
+import { LogEntry } from "../types/interfaces";
 import '../styles/Entries.css'
 import { Button } from "@mui/material";
 

@@ -2,7 +2,7 @@ import { Route, Routes} from 'react-router-dom';
 import User from './User';
 import AddEntry from './AddEntry';
 import Entries from './Entries';
-import { LogEntry } from '../App';
+import { LogEntry } from '../types/interfaces';
 
 
 function Content (props: {logEntries: LogEntry[]}) {
