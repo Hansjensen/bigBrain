@@ -22,13 +22,18 @@ function EntryItem (props: {logEntry: LogEntry}) {
     const {logEntry} = props
     return( 
      <div className="logEntryContainer" >
-        <div className="dateOutline">
-            <h2 className="dateItem">{logEntry.date.getMonth() + '/' +logEntry.date.getDate()}</h2>
-        </div>
-        <h2 className="strainTitle">{logEntry.strain}</h2>
-        <Typography >{logEntry.grams + "g"}</Typography>
-        <Button>Edit</Button>
         
+            <div className="dateOutline">
+                <h2 className="dateItem">{logEntry.date.getMonth() + '/' +logEntry.date.getDate()}</h2>
+            </div>
+            <h2 className="strainTitle">{logEntry.strain}</h2>
+        
+        <Typography className="gramsType" >{logEntry.grams + "g"}</Typography>
+        <div className="editButtDiv">
+        {logEntry.logged &&
+            <Button>Edit</Button> 
+        }
+        </div>
 
 
 

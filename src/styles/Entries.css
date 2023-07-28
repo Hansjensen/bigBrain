@@ -16,6 +16,8 @@
     margin: 1.3rem 0;
     padding: .1rem 1.5rem;
     border: 2px solid var(--primary-main);
+    border-left: none;
+    border-right: none;
 }
 
 .dateItem {
@@ -35,5 +37,18 @@
 }
 
 .strainTitle {
-    
+    border: 1px solid red;
+    width: 35%;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 1.3rem;
+}
+
+.gramsType {
+    width: 25%;
+    border: 1px solid red;
+}
+
+.editButtDiv {
+    width: 15%;
 }
