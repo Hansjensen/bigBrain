@@ -5,9 +5,9 @@ import AddForm from "./AddForm";
 
 const balls: LogEntry = {
     id: 12,
-    strain: 'Diesel',
-    grams: 2000,
-    date: Date,
+    strain: '',
+    grams: NaN,
+    date: new Date(),
     logged: false,
     userId: 0,
 }

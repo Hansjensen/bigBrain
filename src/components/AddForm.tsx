@@ -1,8 +1,10 @@
 import React from 'react'
-import { FormControl, InputLabel, Select, MenuItem, OutlinedInput, InputAdornment, } from '@mui/material'
+import { Button, FormControl, InputLabel, Select, MenuItem, OutlinedInput, InputAdornment, } from '@mui/material'
 import { LogEntry } from '../types/interfaces'
 import { useState } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import dayjs from 'dayjs';
+
 import '../styles/AddEntry.css'
 
 function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
@@ -11,6 +13,7 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
     
     const [strain, setStrain] = useState(logEntry.strain)
     const [grams, setGrams] = useState(logEntry.grams)
+    const [date, setDate] = useState(dayjs(logEntry.date))
 
     const handleStrainChange = (e) => {
         setStrain(e.target.value)
@@ -20,11 +23,17 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
         setGrams(e.target.value)
     }
 
+    const handleDateChange = (e) => {
+        setDate(e)
+        
+    }
+   
+
     return ( 
         <form className="logEntryForm">
                 <FormControl 
                     fullWidth
-                    sx={{my: 2}}>
+                    sx={{my: 4}}>
                     <InputLabel 
                         id="strainSelectLabel"
                         >
@@ -38,17 +47,17 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
                         onChange={handleStrainChange}
 
                     >       {strainList.map(strain => {
-                        return <MenuItem value={strain}>{strain}</MenuItem>
+                        return <MenuItem value={strain} key={Math.random()}>{strain}</MenuItem>
                     })}  
                     </Select>
                     </FormControl>
                     <FormControl fullWidth 
-                        sx={{my: 2}}>
+                        sx={{my: 4}}>
                     <InputLabel htmlFor="gramsInput">Grams</InputLabel>
                     <OutlinedInput
                         
                         fullWidth
-                        value={grams > 0 && grams}
+                        value={grams > 0 ? grams: ''}
                         label="Grams"
                         type="number"
                         id="gramsInput"
@@ -62,7 +71,13 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
                     </FormControl>
                     <MobileDatePicker 
                         label="Date"
-                        sx={{my: 2}}/>
+                        value={date}
+                        onChange={handleDateChange}
+                        sx={{my: 4}}/>
+                    <Button 
+                        variant="contained" 
+                        color="secondary"
+                        sx={{mt: 4, height:60}}>Submit</Button>
                     
 
             </form>
