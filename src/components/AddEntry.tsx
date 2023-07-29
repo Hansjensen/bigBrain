@@ -1,22 +1,30 @@
 import React from "react";
 import { Container } from "@mui/material";
+import AddForm from "./AddForm";
 
 
-export interface LogEntry {
-    id: number;
-    strain: string;
-    grams: number;
-    date: Date;
-    logged: boolean;
-    userId: number;
-} 
+const balls: LogEntry = {
+    id: 12,
+    strain: 'Diesel',
+    grams: 2000,
+    date: Date,
+    logged: false,
+    userId: 0,
+}
+
+const strains: Array<string> = [
+    'Strawguana',
+    'Og Kush',
+    'Diesel'
+]
+
+
+
+
 
 function AddEntry () {
-    return (
-        <Container>
-            
-        </Container>
-    )
+    return  <AddForm logEntry={balls} strainList={strains}/>
+        
 }
 
 export default AddEntry

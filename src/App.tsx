@@ -4,6 +4,7 @@ import Header from './components/Header';
 import React from 'react';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import Content from './components/Content';
 
@@ -20,6 +21,7 @@ import { Link as RouterLink, LinkProps as RouterLinkProps, BrowserRouter } from 
 import { LinkProps } from '@mui/material/Link';
 
 import { LogEntry } from './types/interfaces';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 
 
@@ -139,6 +141,7 @@ function App() {
   return (
     <>
     <ThemeProvider theme={theme}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <BrowserRouter>
       <CssBaseline/>
 
@@ -154,6 +157,7 @@ function App() {
         sx={{ position: 'fixed', bottom: 0, width: 1.0, }}
         showLabels
         value={selectedBottom}
+        color='secondary'
         onChange={(event, newValue) => {
           setSelectedBottom(newValue);
         }}>
@@ -165,6 +169,7 @@ function App() {
          
       </BottomNavigation>
       </BrowserRouter>
+      </LocalizationProvider>
     </ThemeProvider>
      
     </>
