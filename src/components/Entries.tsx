@@ -1,7 +1,7 @@
 import React from "react";
 import { LogEntry } from "../types/interfaces";
 import '../styles/Entries.css'
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 function Entries (props: {logEntries: LogEntry[]}) {
     const {logEntries} = props
@@ -26,7 +26,9 @@ function EntryItem (props: {logEntry: LogEntry}) {
             <div className="dateOutline">
                 <h2 className="dateItem">{logEntry.date.getMonth() + '/' +logEntry.date.getDate()}</h2>
             </div>
-            <h2 className="strainTitle">{logEntry.strain}</h2>
+            <Typography 
+                noWrap 
+                className="strainTitle">{logEntry.strain}</Typography>
         
             <h4
             className="gramsType" >

@@ -20,7 +20,7 @@ import {CssBaseline} from '@mui/material';
 import { Link as RouterLink, LinkProps as RouterLinkProps, BrowserRouter } from 'react-router-dom';
 import { LinkProps } from '@mui/material/Link';
 
-import { LogEntry } from './types/interfaces';
+import { LogEntry, Admin, User } from './types/interfaces';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 
@@ -61,7 +61,15 @@ const theme = createTheme({
   },
 });
 
+//ADMIN SETTINGS 
 
+const sceneSetting: sceneSetting = {
+  pricePerPound: 70,
+  currentScene: 'Test Test',
+  wetDry: 'Wet'
+
+
+}
 
 
 console.log('out')
@@ -75,6 +83,7 @@ const logEntriesData: LogEntry[] = [
     date: new Date("2023-07-27"),
     logged: false,
     userId: 101,
+    scene: "Test Test"
   },
   {
     id: 2,
@@ -82,7 +91,8 @@ const logEntriesData: LogEntry[] = [
     grams: 1988,
     date: new Date("2023-07-26"),
     logged: true,
-    userId: 102,
+    userId: 101,
+    scene:  "Test Test"
   },
   
   {
@@ -91,7 +101,8 @@ const logEntriesData: LogEntry[] = [
     grams: 2500,
     date: new Date("2023-07-04"),
     logged: true,
-    userId: 105,
+    userId: 101,
+    scene: "Test Test"
   },
 
   {
@@ -100,7 +111,8 @@ const logEntriesData: LogEntry[] = [
     grams: 4000,
     date: new Date("2023-07-03"),
     logged: true,
-    userId: 105,
+    userId: 101,
+    scene: "Test Test"
   },
 
   {
@@ -109,7 +121,8 @@ const logEntriesData: LogEntry[] = [
     grams: 4567,
     date: new Date("2023-07-02"),
     logged: true,
-    userId: 105,
+    userId: 101,
+    scene: "Test Test"
   },
 
   {
@@ -118,18 +131,21 @@ const logEntriesData: LogEntry[] = [
     grams: 1000,
     date: new Date("2023-07-01"),
     logged: true,
-    userId: 105,
+    userId: 101,
+    scene: "Test Test"
   },
 ];
-const userData = {
+const userData: User = {
   userName: "Hans",
-  id: 10,
+  id: 101,
+  sceneList: ["Slick Dep 2023", "Test Test"]
 }
 
 function App() {
   const[user, setUser] = useState(userData)
   const[selectedBottom, setSelectedBottom] = useState('')
   const[logEntries, setLogEntries] = useState(logEntriesData)
+ 
   
 
 
@@ -148,7 +164,7 @@ function App() {
       <Header user={user} />
       
     
-      <Content logEntries={logEntries}/>
+      <Content logEntries={logEntries} user={user} scene={sceneSetting}/>
      
      
       

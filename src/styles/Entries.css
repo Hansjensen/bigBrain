@@ -43,7 +43,9 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 1.2rem;
-    color: var(--secondary-dark)
+    color: var(--secondary-dark);
+    font-weight: 700;
+    
 }
 
 .gramsType {

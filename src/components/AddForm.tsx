@@ -25,7 +25,11 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
 
     const handleDateChange = (e) => {
         setDate(e)
-        
+    }
+
+    const handleSubmitClick = (e) => {
+        e.preventDefault()
+        console.log(strain, grams, date)
     }
    
 
@@ -77,6 +81,7 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
                     <Button 
                         variant="contained" 
                         color="secondary"
+                        onClick={handleSubmitClick}
                         sx={{mt: 4, height:60}}>Submit</Button>
                     
 
