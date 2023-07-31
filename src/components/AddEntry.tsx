@@ -1,15 +1,16 @@
-import React from "react";
-import { Container } from "@mui/material";
+
 import AddForm from "./AddForm";
-import { LogEntry, SceneSetting } from "../types/interfaces";
+import { LogEntry, SceneSetting , User} from "../types/interfaces";
+import dayjs from "dayjs";
 
 const balls: LogEntry = {
-    id: 12,
+    id: '',
     strain: '',
     grams: NaN,
-    date: new Date(),
+    date: dayjs(new Date()),
     logged: false,
-    userId: 0,
+    userId: '0',
+    scene: 'Test Test'
 }
 
 const strains: Array<string> = [
@@ -22,8 +23,9 @@ const strains: Array<string> = [
 
 
 
-function AddEntry (props: {logEntries: LogEntry[], user: User, scene: SceneSetting}) {
-    return  <AddForm logEntry={balls} strainList={strains}/>
+function AddEntry (props: {user: User, scene: SceneSetting}) {
+    const {user, scene} = props
+    return  <AddForm logEntry={balls} strainList={strains} scene={scene} user={user}/>
         
 }
 

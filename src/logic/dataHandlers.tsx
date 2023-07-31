@@ -1,4 +1,4 @@
-import { LogEntry, User } from "../types/interfaces"
+import { LogEntry } from "../types/interfaces"
 
 const userTotalGramsHandler = (logEntries: LogEntry[], scene: string) => {
 

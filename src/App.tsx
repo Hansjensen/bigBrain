@@ -1,10 +1,11 @@
 
 import './App.css'
 import Header from './components/Header';
-import React from 'react';
-import { useState } from 'react';
+import React, { useReducer, useState } from 'react';
+
 import { createTheme, ThemeProvider } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs';
 
 import Content from './components/Content';
 
@@ -22,6 +23,9 @@ import { LinkProps } from '@mui/material/Link';
 
 import { LogEntry, Admin, User } from './types/interfaces';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+
+import { logEntryReducer } from './components/Reducers';
+import {LogContext, LogDispatchContext} from './components/LogContext'
 
 
 
@@ -76,75 +80,76 @@ console.log('out')
 
 
 const logEntriesData: LogEntry[] = [
-  {
-    id: 1,
+   {
+    id: '1',
     strain: "OG Kush",
     grams: 2700,
-    date: new Date("2023-07-27"),
+    date: dayjs("2023-07-27"),
     logged: false,
-    userId: 101,
+    userId: '101',
     scene: "Test Test"
   },
   {
-    id: 2,
+    id: '2',
     strain: "Purple People Eater",
     grams: 1988,
-    date: new Date("2023-07-26"),
+    date: dayjs(),
     logged: true,
-    userId: 101,
+    userId: '101',
     scene:  "Test Test"
   },
   
   {
-    id: 25,
+    id: '25',
     strain: "Green Crack",
     grams: 2500,
-    date: new Date("2023-07-04"),
+    date: dayjs("2023-07-04"),
     logged: true,
-    userId: 101,
+    userId: '101',
     scene: "Test Test"
   },
 
   {
-    id: 46,
+    id: '46',
     strain: "Birthday Cake",
     grams: 4000,
-    date: new Date("2023-07-03"),
+    date: dayjs("2023-07-03"),
     logged: true,
-    userId: 101,
+    userId: '101',
     scene: "Test Test"
   },
 
   {
-    id: 64,
+    id: '64',
     strain: "Cookies",
     grams: 4567,
-    date: new Date("2023-07-02"),
+    date: dayjs("2023-07-02"),
     logged: true,
-    userId: 101,
+    userId: '101',
     scene: "Test Test"
   },
 
   {
-    id: 21,
+    id: '21',
     strain: "Diesel",
     grams: 1000,
-    date: new Date("2023-07-01"),
+    date: dayjs("2023-07-01"),
     logged: true,
-    userId: 101,
+    userId: '101',
     scene: "Test Test"
   },
-];
+]
 const userData: User = {
   userName: "Hans",
-  id: 101,
+  id: '101',
   sceneList: ["Slick Dep 2023", "Test Test"]
 }
 
 function App() {
   const[user, setUser] = useState(userData)
   const[selectedBottom, setSelectedBottom] = useState('')
-  const[logEntries, setLogEntries] = useState(logEntriesData)
+  const[logEntries, dispatchLogEntries] = useReducer(logEntryReducer, logEntriesData)
+
  
   
 
@@ -153,40 +158,44 @@ function App() {
  
 
 
-  console.log('load')
+  console.log(logEntries)
   return (
     <>
-    <ThemeProvider theme={theme}>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <BrowserRouter>
-      <CssBaseline/>
+    <LogContext.Provider value={logEntries}>
+      <LogDispatchContext.Provider value={dispatchLogEntries}>
+        <ThemeProvider theme={theme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <BrowserRouter>
+            <CssBaseline/>
 
-      <Header user={user} />
-      
-    
-      <Content logEntries={logEntries} user={user} scene={sceneSetting}/>
-     
-     
-      
-      <BottomNavigation
-        id="bottomNav"
-        sx={{ position: 'fixed', bottom: 0, width: 1.0, }}
-        showLabels
-        value={selectedBottom}
-        color='secondary'
-        onChange={(event, newValue) => {
-          setSelectedBottom(newValue);
-        }}>
-        
-         
-            <BottomNavigationAction component={RouterLink}  to="/user" value="/user" label="User" icon={<AccountCircleOutlined />} />
-            <BottomNavigationAction component={RouterLink}  to="/addentry" value="/addentry" label="Add Entry" icon={<Add/>} />
-            <BottomNavigationAction component={RouterLink}  to="/entries" value="/entries" label="Entries" icon={<DocumentScanner />} />
-         
-      </BottomNavigation>
-      </BrowserRouter>
-      </LocalizationProvider>
-    </ThemeProvider>
+            <Header user={user} />
+            
+          
+            <Content  user={user} scene={sceneSetting} />
+          
+          
+            
+            <BottomNavigation
+              id="bottomNav"
+              sx={{ position: 'fixed', bottom: 0, width: 1.0, }}
+              showLabels
+              value={selectedBottom}
+              color='secondary'
+              onChange={(event, newValue) => {
+                setSelectedBottom(newValue);
+              }}>
+              
+              
+                  <BottomNavigationAction component={RouterLink}  to="/user" value="/user" label="User" icon={<AccountCircleOutlined />} />
+                  <BottomNavigationAction component={RouterLink}  to="/addentry" value="/addentry" label="Add Entry" icon={<Add/>} />
+                  <BottomNavigationAction component={RouterLink}  to="/entries" value="/entries" label="Entries" icon={<DocumentScanner />} />
+              
+            </BottomNavigation>
+            </BrowserRouter>
+            </LocalizationProvider>
+        </ThemeProvider>
+      </LogDispatchContext.Provider>
+    </LogContext.Provider>
      
     </>
   

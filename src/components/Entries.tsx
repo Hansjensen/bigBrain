@@ -1,13 +1,14 @@
-import React from "react";
 import { LogEntry } from "../types/interfaces";
 import '../styles/Entries.css'
 import { Button, Typography } from "@mui/material";
+import { useContext } from "react";
+import { LogContext } from "./LogContext";
 
-function Entries (props: {logEntries: LogEntry[]}) {
-    const {logEntries} = props
+function Entries () {
+    const logEntries = useContext(LogContext)
     return(
         <div id="entriesContainer">
-            {logEntries.map(entry => {
+            {logEntries.map((entry: LogEntry) => {
                 console.log(entry.date)
                 return <EntryItem logEntry={entry} key={entry.id}/>
                 
@@ -24,7 +25,7 @@ function EntryItem (props: {logEntry: LogEntry}) {
      <div className="logEntryContainer" >
         
             <div className="dateOutline">
-                <h2 className="dateItem">{logEntry.date.getMonth() + '/' +logEntry.date.getDate()}</h2>
+                <h2 className="dateItem">{logEntry.date.get('month') + '/' +logEntry.date.get('date')}</h2>
             </div>
             <Typography 
                 noWrap 

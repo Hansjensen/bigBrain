@@ -1,35 +1,47 @@
-import React from 'react'
+
 import { Button, FormControl, InputLabel, Select, MenuItem, OutlinedInput, InputAdornment, } from '@mui/material'
-import { LogEntry } from '../types/interfaces'
-import { useState } from 'react'
+import { LogEntry, SceneSetting, User } from '../types/interfaces'
+import { useState, useContext } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
+import { LogDispatchContext } from './LogContext';
 
 import '../styles/AddEntry.css'
 
-function AddForm(props: {logEntry: LogEntry, strainList: Array<string>}) {
-    const {logEntry, strainList} = props
+function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: User, scene: SceneSetting}) {
+    const {logEntry, strainList, user, scene} = props
     
     
     const [strain, setStrain] = useState(logEntry.strain)
-    const [grams, setGrams] = useState(logEntry.grams)
+    const [grams, setGrams] = useState<number>(logEntry.grams)
     const [date, setDate] = useState(dayjs(logEntry.date))
 
-    const handleStrainChange = (e) => {
+    const dispatch = useContext(LogDispatchContext)
+
+    const handleStrainChange = (e: any) => {
         setStrain(e.target.value)
+       
     }
 
-    const handleGramsChange = (e) => {
-        setGrams(e.target.value)
+    const handleGramsChange = (e: any) => {
+        setGrams(parseInt(e.target.value))
+       
     }
 
-    const handleDateChange = (e) => {
+    const handleDateChange = (e: any) => {
         setDate(e)
     }
 
-    const handleSubmitClick = (e) => {
+    const handleSubmitClick = (e: any) => {
         e.preventDefault()
-        console.log(strain, grams, date)
+        dispatch({  
+                    type: 'add_logEntry',
+                    strain: strain,
+                    grams: grams,
+                    date: date,
+                    userId: user.id,
+                    scene: scene.currentScene,
+        })
     }
    
 

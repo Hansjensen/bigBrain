@@ -1,11 +1,14 @@
+import { Dispatch } from "react";
+import { Dayjs } from "dayjs";
+
 export interface LogEntry {
-    id: number;
+    id: string;
     strain: string;
     grams: number;
-    date: Date;
+    date: Dayjs;
     logged: boolean;
-    userId: number;
-    scene: string
+    userId: string;
+    scene: string;
 } 
 
 export interface LogEntryProps {
@@ -14,7 +17,7 @@ export interface LogEntryProps {
 
 export interface User {
   userName: string,
-  id: number,
+  id: string,
   sceneList: Array<string>
 }
 
@@ -23,4 +26,8 @@ export interface SceneSetting {
     currentScene: string,
     wetDry: 'Wet' | 'Dry',
 }
+
+export interface ComponentProps {
+    dispatch: Dispatch<{ type: string }>
+  }
 

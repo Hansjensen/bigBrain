@@ -1,17 +1,17 @@
-import React from "react";
-import {User, LogEntry, Admin, SceneSetting} from '../types/interfaces.ts'
+import React, { useContext } from "react";
+import {User, LogEntry,  SceneSetting} from '../types/interfaces.ts'
 import { FormControl, InputLabel, Select, MenuItem, Typography, Button } from "@mui/material";
 import '../styles/User.css'
 import { useState , useEffect} from 'react';
-import { userTotalGramsHandler, userTotalOwedHandler } from "../logic/dataHandlers.tsx";
+import { userTotalGramsHandler, userTotalOwedHandler } from '../logic/dataHandlers.tsx'
+import { LogContext } from "./LogContext.tsx";
 
 
 
+function UserPage (props: {user: User, scene: SceneSetting}) {
 
-function UserPage (props: {user: User, scene: SceneSetting, logEntries: LogEntry[]}) {
-
-    const{user, logEntries, scene} = props;
-
+    const{user, scene} = props;
+    const logEntries = useContext(LogContext)
     const[sceneValue, setSceneValue] = useState(scene.currentScene)
     const[totalGrams, setTotalGrams] = useState(1934)
     const[total, setTotal] = useState(1032)
@@ -58,8 +58,9 @@ function UserPage (props: {user: User, scene: SceneSetting, logEntries: LogEntry
                          sx={{my: 5}}>Total Grams: {totalGrams} g</Typography>
                     <Typography 
                         variant="h4"
-                        sx={{my: 5}}>Total Owed: ${total}</Typography>
+                        sx={{my: 5}}>Total: ${total}</Typography>
                     <Button 
+                        color="secondary"
                         variant="contained"
                         sx={{my: 5}}>Logout</Button>
         </div>
