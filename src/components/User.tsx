@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import {User, LogEntry,  SceneSetting} from '../types/interfaces.ts'
+import {User,  SceneSetting} from '../types/interfaces.ts'
 import { FormControl, InputLabel, Select, MenuItem, Typography, Button } from "@mui/material";
 import '../styles/User.css'
 import { useState , useEffect} from 'react';
@@ -32,7 +32,7 @@ function UserPage (props: {user: User, scene: SceneSetting}) {
 
     return (
         <div id="userPageContainer">
-            <FormControl 
+                <FormControl 
                     fullWidth
                     sx={{my: 5}}
                   >

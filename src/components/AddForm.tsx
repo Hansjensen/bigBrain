@@ -3,37 +3,44 @@ import { Button, FormControl, InputLabel, Select, MenuItem, OutlinedInput, Input
 import { LogEntry, SceneSetting, User } from '../types/interfaces'
 import { useState, useContext } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import dayjs from 'dayjs';
 import { LogDispatchContext } from './LogContext';
 
 import '../styles/AddEntry.css'
 
-function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: User, scene: SceneSetting}) {
-    const {logEntry, strainList, user, scene} = props
+function AddForm(props:  {logEntry: LogEntry, strainList: Array<string>, edit: boolean, user: User, scene: SceneSetting}) {
+    const { strainList, user, scene, edit} = props
     
+    const [log, setLog] = useState(props.logEntry)
     
-    const [strain, setStrain] = useState(logEntry.strain)
-    const [grams, setGrams] = useState<number>(logEntry.grams)
-    const [date, setDate] = useState(dayjs(logEntry.date))
+    const { strain, grams, date } = log
 
     const dispatch = useContext(LogDispatchContext)
 
     const handleStrainChange = (e: any) => {
-        setStrain(e.target.value)
+        setLog({...log , strain: e.target.value})
        
     }
 
     const handleGramsChange = (e: any) => {
-        setGrams(parseInt(e.target.value))
+        setLog({...log, grams: parseInt(e.target.value)})
        
     }
 
     const handleDateChange = (e: any) => {
-        setDate(e)
+        setLog({...log, date: e.target.value})
     }
 
     const handleSubmitClick = (e: any) => {
         e.preventDefault()
+        if(edit) {
+            dispatch({  
+                type: 'edit_logEntry',
+                strain: strain,
+                grams: grams,
+                date: date,
+                
+         })
+        } else {
         dispatch({  
                     type: 'add_logEntry',
                     strain: strain,
@@ -41,10 +48,8 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: Us
                     date: date,
                     userId: user.id,
                     scene: scene.currentScene,
-        })
+        })}
     }
-   
-
     return ( 
         <form className="logEntryForm">
                 <FormControl 
@@ -62,8 +67,8 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: Us
                         label="Strain"
                         onChange={handleStrainChange}
 
-                    >       {strainList.map(strain => {
-                        return <MenuItem value={strain} key={Math.random()}>{strain}</MenuItem>
+                    >       {strainList.map(straini => {
+                        return <MenuItem value={straini} key={straini}>{straini}</MenuItem>
                     })}  
                     </Select>
                     </FormControl>
@@ -79,10 +84,7 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: Us
                         id="gramsInput"
                         onChange={handleGramsChange}
                         endAdornment={<InputAdornment position="end">g</InputAdornment>}
-                        aria-describedby="grams input"
-                        inputProps={{
-                            'aria-label': 'weight',
-                    }}
+                        
                     />
                     </FormControl>
                     <MobileDatePicker 
@@ -94,7 +96,7 @@ function AddForm(props: {logEntry: LogEntry, strainList: Array<string>, user: Us
                         variant="contained" 
                         color="secondary"
                         onClick={handleSubmitClick}
-                        sx={{mt: 4, height:60}}>Submit</Button>
+                        sx={{mt: 4, height:60}}>{edit?"Edit":"Submit"}</Button>
                     
 
             </form>

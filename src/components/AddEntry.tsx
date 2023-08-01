@@ -23,9 +23,9 @@ const strains: Array<string> = [
 
 
 
-function AddEntry (props: {user: User, scene: SceneSetting}) {
+function AddEntry (props: {user: User, scene: SceneSetting, strains: Array<string>}) {
     const {user, scene} = props
-    return  <AddForm logEntry={balls} strainList={strains} scene={scene} user={user}/>
+    return  <AddForm logEntry={balls} strainList={strains} scene={scene} user={user} edit={false}/>
         
 }
 

@@ -8,7 +8,7 @@ type ActionLogEntry =
 
 export function logEntryReducer(state: LogEntry[] | any , action: ActionLogEntry) {
     const {type} = action
-    console.log(action)
+    
     switch(type) {
         case 'add_logEntry': {
             return [               

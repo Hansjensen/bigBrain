@@ -21,11 +21,12 @@ import {CssBaseline} from '@mui/material';
 import { Link as RouterLink, LinkProps as RouterLinkProps, BrowserRouter } from 'react-router-dom';
 import { LinkProps } from '@mui/material/Link';
 
-import { LogEntry, Admin, User } from './types/interfaces';
+import { LogEntry, SceneSetting, User } from './types/interfaces';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
 import { logEntryReducer } from './components/Reducers';
 import {LogContext, LogDispatchContext} from './components/LogContext'
+import uniqid from 'uniqid'
 
 
 
@@ -67,7 +68,7 @@ const theme = createTheme({
 
 //ADMIN SETTINGS 
 
-const sceneSetting: sceneSetting = {
+const scene: SceneSetting = {
   pricePerPound: 70,
   currentScene: 'Test Test',
   wetDry: 'Wet'
@@ -80,30 +81,22 @@ console.log('out')
 
 
 const logEntriesData: LogEntry[] = [
-   {
-    id: '1',
-    strain: "OG Kush",
-    grams: 2700,
-    date: dayjs("2023-07-27"),
-    logged: false,
-    userId: '101',
-    scene: "Test Test"
-  },
+  
   {
-    id: '2',
+    id: uniqid(),
     strain: "Purple People Eater",
     grams: 1988,
     date: dayjs(),
-    logged: true,
+    logged: false,
     userId: '101',
     scene:  "Test Test"
   },
   
   {
-    id: '25',
+    id: uniqid(),
     strain: "Green Crack",
     grams: 2500,
-    date: dayjs("2023-07-04"),
+    date: dayjs(),
     logged: true,
     userId: '101',
     scene: "Test Test"
@@ -113,7 +106,7 @@ const logEntriesData: LogEntry[] = [
     id: '46',
     strain: "Birthday Cake",
     grams: 4000,
-    date: dayjs("2023-07-03"),
+    date: dayjs(),
     logged: true,
     userId: '101',
     scene: "Test Test"
@@ -123,7 +116,7 @@ const logEntriesData: LogEntry[] = [
     id: '64',
     strain: "Cookies",
     grams: 4567,
-    date: dayjs("2023-07-02"),
+    date: dayjs(),
     logged: true,
     userId: '101',
     scene: "Test Test"
@@ -144,6 +137,12 @@ const userData: User = {
   id: '101',
   sceneList: ["Slick Dep 2023", "Test Test"]
 }
+const strains: Array<string> = [
+  'Strawguana',
+  'Og Kush',
+  'Diesel'
+]
+
 
 function App() {
   const[user, setUser] = useState(userData)
@@ -151,14 +150,7 @@ function App() {
   const[logEntries, dispatchLogEntries] = useReducer(logEntryReducer, logEntriesData)
 
  
-  
 
-
-
- 
-
-
-  console.log(logEntries)
   return (
     <>
     <LogContext.Provider value={logEntries}>
@@ -171,7 +163,7 @@ function App() {
             <Header user={user} />
             
           
-            <Content  user={user} scene={sceneSetting} />
+            <Content  user={user} scene={scene} strains={strains} />
           
           
             
