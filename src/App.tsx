@@ -83,8 +83,8 @@ console.log('out')
 const logEntriesData: LogEntry[] = [
   
   {
-    id: uniqid(),
-    strain: "Purple People Eater",
+    id: uniqid('log-'),
+    strain: "Og Kush",
     grams: 1988,
     date: dayjs(),
     logged: false,
@@ -93,7 +93,7 @@ const logEntriesData: LogEntry[] = [
   },
   
   {
-    id: uniqid(),
+    id: uniqid('log-'),
     strain: "Green Crack",
     grams: 2500,
     date: dayjs(),

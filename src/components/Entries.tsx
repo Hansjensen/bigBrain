@@ -27,8 +27,7 @@ function Entries (props: {strains: Array<string>, scene: SceneSetting, user: Use
             {!editBool ? logEntries.map((entry: LogEntry) => {
                 return <EntryItem logEntry={entry} key={entry.id} setEditBool={setEditBool} setCurrentLog={setCurrentLog}/>
                 }):
-                <AddForm logEntry={currentLog} strainList={strains} edit={true} scene={scene} user={user}></AddForm>
-                
+                <AddForm logEntry={currentLog} strainList={strains} edit={true} scene={scene} user={user} setEditBool={setEditBool}></AddForm>
             
             }
         </div>
@@ -40,8 +39,10 @@ function Entries (props: {strains: Array<string>, scene: SceneSetting, user: Use
 function EntryItem (props: {logEntry: LogEntry, setCurrentLog: Dispatch<SetStateAction<LogEntry>>, setEditBool: Dispatch<SetStateAction<boolean>>}) {
     const {logEntry, setEditBool, setCurrentLog} = props
     const [thisEntry, setThisEntry] = useState<LogEntry>(logEntry)
+  
         
     const handleEditButtonClick = (e) => {
+        
         setCurrentLog(() => thisEntry)
         setEditBool(true)
         
@@ -65,7 +66,7 @@ function EntryItem (props: {logEntry: LogEntry, setCurrentLog: Dispatch<SetState
         <div className="editButtDiv">
         
         {!logEntry.logged &&
-            <Button variant="contained" color="secondary" size="small" onClick={handleEditButtonClick}>Edit</Button> 
+            <Button variant="contained" color="secondary" size="small"  id={logEntry.id} onClick={handleEditButtonClick}>Edit</Button> 
         }
         </div>
 
