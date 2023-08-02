@@ -4,7 +4,7 @@ import { Dayjs } from "dayjs";
 export interface LogEntry {
     id: string;
     strain: string;
-    grams: number;
+    grams: number | string;
     date: Dayjs;
     logged: boolean;
     userId: string;

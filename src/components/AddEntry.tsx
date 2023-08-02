@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 const balls: LogEntry = {
     id: '',
     strain: '',
-    grams: NaN,
+    grams: '',
     date: dayjs(new Date()),
     logged: false,
     userId: '0',
@@ -25,7 +25,8 @@ const strains: Array<string> = [
 
 function AddEntry (props: {user: User, scene: SceneSetting, strains: Array<string>}) {
     const {user, scene} = props
-    return  <AddForm logEntry={balls} strainList={strains} scene={scene} user={user} edit={false}/>
+    
+    return  <AddForm logEntry={balls} strainList={strains} scene={scene} user={user} edit={false} setEditBool={null}/>
         
 }
 
