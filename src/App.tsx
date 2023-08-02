@@ -145,7 +145,7 @@ const strains: Array<string> = [
 
 
 function App() {
-  const[user, setUser] = useState(userData)
+  const[user] = useState(userData)
   const[selectedBottom, setSelectedBottom] = useState('')
   const[logEntries, dispatchLogEntries] = useReducer(logEntryReducer, logEntriesData)
 

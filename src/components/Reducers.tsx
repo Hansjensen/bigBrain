@@ -1,4 +1,4 @@
-import { error } from "console"
+
 import { LogEntry } from "../types/interfaces"
 import uniqid from 'uniqid'
 

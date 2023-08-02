@@ -1,5 +1,5 @@
 
-import { Button, FormControl, InputLabel, Select, MenuItem, OutlinedInput, InputAdornment, FormHelperText, } from '@mui/material'
+import { Button, FormControl, InputLabel, Select, MenuItem, OutlinedInput, InputAdornment } from '@mui/material'
 import { LogEntry, SceneSetting, User } from '../types/interfaces'
 import { useState, useContext, Dispatch, SetStateAction } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';

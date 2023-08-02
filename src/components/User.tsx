@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import {User,  SceneSetting} from '../types/interfaces.ts'
 import { FormControl, InputLabel, Select, MenuItem, Typography, Button } from "@mui/material";
 import '../styles/User.css'
@@ -17,16 +17,15 @@ function UserPage (props: {user: User, scene: SceneSetting}) {
     const[total, setTotal] = useState(1032)
    
 
-    
     useEffect(() => {
-        
+        console.log('bing')
         setTotalGrams(userTotalGramsHandler(logEntries, sceneValue))
         setTotal(() => userTotalOwedHandler(totalGrams, scene.pricePerPound, scene.wetDry))
 
       }, [sceneValue, logEntries, totalGrams, scene.pricePerPound, scene.wetDry]);
 
 
-    const handleSceneChange = (e) => {
+    const handleSceneChange = (e: any) => {
         setSceneValue(e.target.value)
     }
 

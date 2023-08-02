@@ -38,10 +38,10 @@ function Entries (props: {strains: Array<string>, scene: SceneSetting, user: Use
 
 function EntryItem (props: {logEntry: LogEntry, setCurrentLog: Dispatch<SetStateAction<LogEntry>>, setEditBool: Dispatch<SetStateAction<boolean>>}) {
     const {logEntry, setEditBool, setCurrentLog} = props
-    const [thisEntry, setThisEntry] = useState<LogEntry>(logEntry)
+    const [thisEntry] = useState<LogEntry>(logEntry)
   
         
-    const handleEditButtonClick = (e) => {
+    const handleEditButtonClick = () => {
         
         setCurrentLog(() => thisEntry)
         setEditBool(true)
