@@ -5,7 +5,7 @@ import { useState, useContext, Dispatch, SetStateAction } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LogDispatchContext } from './LogContext';
 import '../styles/AddForm.css'
-
+import { useAuth } from './AuthContext';
 import '../styles/AddEntry.css'
 import { useNavigate } from 'react-router';
 
@@ -17,7 +17,8 @@ function AddForm(props:  {logEntry: LogEntry, strainList: Array<string>, edit: b
    const [grams, setGrams] = useState(logEntry.grams)
    const [date, setDate] = useState(logEntry.date)
    const [strainError, setStrainError ] = useState(false)
-   const [gramsError, setGramsError] = useState(false) 
+   const [gramsError, setGramsError] = useState(false)
+   const {currentUser} = useAuth()
     
     const navigate = useNavigate()
     const dispatch = useContext(LogDispatchContext)
@@ -70,7 +71,7 @@ function AddForm(props:  {logEntry: LogEntry, strainList: Array<string>, edit: b
                             strain: strain,
                             grams: grams,
                             date: date,
-                            userId: user.id,
+                            userId: currentUser.uid,
                             scene: scene.currentScene,
                 })
                 navigate('/entries')

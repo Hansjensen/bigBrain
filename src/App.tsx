@@ -89,7 +89,7 @@ const logEntriesData: LogEntry[] = [
     grams: 1988,
     date: dayjs(),
     logged: false,
-    userId: '101',
+    userId: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
     scene:  "Test Test"
   },
   

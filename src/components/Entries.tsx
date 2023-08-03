@@ -10,6 +10,7 @@ import { useAuth } from "./AuthContext";
 function Entries (props: {strains: Array<string>, scene: SceneSetting, user: User}) {
     const logEntries = useContext(LogContext)
     const {strains, scene, user} = props
+    const {currentUser} = useAuth()
     const [currentLog, setCurrentLog] = useState<LogEntry>({
                                                             
         id: "",
@@ -26,7 +27,8 @@ function Entries (props: {strains: Array<string>, scene: SceneSetting, user: Use
     return(
         <div id="entriesContainer">
             {!editBool ? logEntries.map((entry: LogEntry) => {
-                return <EntryItem logEntry={entry} key={entry.id} setEditBool={setEditBool} setCurrentLog={setCurrentLog}/>
+                if (currentUser.uid === entry.userId) return <EntryItem logEntry={entry} key={entry.id} setEditBool={setEditBool} setCurrentLog={setCurrentLog}/>
+
                 }):
                 <AddForm logEntry={currentLog} strainList={strains} edit={true} scene={scene} user={user} setEditBool={setEditBool}></AddForm>
             
