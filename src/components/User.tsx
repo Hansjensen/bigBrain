@@ -5,6 +5,9 @@ import '../styles/User.css'
 import { useState , useEffect} from 'react';
 import { userTotalGramsHandler, userTotalOwedHandler } from '../logic/dataHandlers.tsx'
 import { LogContext } from "./LogContext.tsx";
+import { useAuth } from "./AuthContext.tsx";
+import app from "../firebase.ts";
+import { useNavigate } from "react-router";
 
 
 
@@ -15,10 +18,13 @@ function UserPage (props: {user: User, scene: SceneSetting}) {
     const[sceneValue, setSceneValue] = useState(scene.currentScene)
     const[totalGrams, setTotalGrams] = useState(1934)
     const[total, setTotal] = useState(1032)
+    const {logout} = useAuth(app)
+    const [error, setError] = useState("")
+    const navigate = useNavigate()
    
 
     useEffect(() => {
-        console.log('bing')
+        
         setTotalGrams(userTotalGramsHandler(logEntries, sceneValue))
         setTotal(() => userTotalOwedHandler(totalGrams, scene.pricePerPound, scene.wetDry))
 
@@ -27,6 +33,17 @@ function UserPage (props: {user: User, scene: SceneSetting}) {
 
     const handleSceneChange = (e: any) => {
         setSceneValue(e.target.value)
+    }
+
+    async function handleLogoutClick() {
+        setError("")
+        try {
+            await logout()
+            navigate('/')
+        } catch {
+            setError("Failed to Logout")
+        }
+        
     }
 
     return (
@@ -59,6 +76,7 @@ function UserPage (props: {user: User, scene: SceneSetting}) {
                         variant="h4"
                         sx={{my: 5}}>Total: ${total}</Typography>
                     <Button 
+                        onClick={handleLogoutClick}
                         color="secondary"
                         variant="contained"
                         sx={{my: 5}}>Logout</Button>

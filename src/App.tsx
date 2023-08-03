@@ -23,10 +23,13 @@ import { LinkProps } from '@mui/material/Link';
 
 import { LogEntry, SceneSetting, User } from './types/interfaces';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AuthProvider } from './components/AuthContext';
 
 import { logEntryReducer } from './components/Reducers';
 import {LogContext, LogDispatchContext} from './components/LogContext'
 import uniqid from 'uniqid'
+
+
 
 
 
@@ -153,6 +156,7 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
     <LogContext.Provider value={logEntries}>
       <LogDispatchContext.Provider value={dispatchLogEntries}>
         <ThemeProvider theme={theme}>
@@ -188,7 +192,7 @@ function App() {
         </ThemeProvider>
       </LogDispatchContext.Provider>
     </LogContext.Provider>
-     
+    </AuthProvider>
     </>
   
   )

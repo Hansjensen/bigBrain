@@ -3,6 +3,7 @@ import UserPage from './User';
 import AddEntry from './AddEntry';
 import Entries from './Entries';
 import { User, SceneSetting,  } from '../types/interfaces';
+import Login from './Login';
 
 
 function Content (props: { user: User, scene: SceneSetting, strains: Array<string>  }) {
@@ -11,6 +12,8 @@ function Content (props: { user: User, scene: SceneSetting, strains: Array<strin
     return(
         
             <Routes>
+
+                <Route exact path="/" element={<Login/>}/>
                 
                 <Route  path="/user" element={<UserPage 
                                                 user={user} 
