@@ -3,6 +3,8 @@
   width: 100vw;
 }
 
-#bottomNav {
- 
+
+.hidden {
+  display: 'none';
+  background-color: black;
 }

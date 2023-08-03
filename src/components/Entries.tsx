@@ -5,6 +5,7 @@ import { SetStateAction, useContext, useState, Dispatch } from "react";
 import { LogContext } from "./LogContext";
 import AddForm from "./AddForm";
 import dayjs from "dayjs";
+import { useAuth } from "./AuthContext";
 
 function Entries (props: {strains: Array<string>, scene: SceneSetting, user: User}) {
     const logEntries = useContext(LogContext)

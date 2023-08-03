@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {initializeApp} from  'firebase/app' 
 import {getAuth} from 'firebase/auth' 
 // TODO: Add SDKs for Firebase products that you want to use

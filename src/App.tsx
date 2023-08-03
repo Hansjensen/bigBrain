@@ -1,7 +1,7 @@
 
 import './App.css'
 import Header from './components/Header';
-import React, { useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -23,11 +23,12 @@ import { LinkProps } from '@mui/material/Link';
 
 import { LogEntry, SceneSetting, User } from './types/interfaces';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AuthProvider } from './components/AuthContext';
+import { useAuth, AuthProvider} from './components/AuthContext';
 
 import { logEntryReducer } from './components/Reducers';
 import {LogContext, LogDispatchContext} from './components/LogContext'
 import uniqid from 'uniqid'
+
 
 
 
@@ -80,9 +81,6 @@ const scene: SceneSetting = {
 }
 
 
-console.log('out')
-
-
 const logEntriesData: LogEntry[] = [
   
   {
@@ -101,7 +99,7 @@ const logEntriesData: LogEntry[] = [
     grams: 2500,
     date: dayjs(),
     logged: true,
-    userId: '101',
+    userId: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
     scene: "Test Test"
   },
 
@@ -111,7 +109,7 @@ const logEntriesData: LogEntry[] = [
     grams: 4000,
     date: dayjs(),
     logged: true,
-    userId: '101',
+    userId: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
     scene: "Test Test"
   },
 
@@ -121,7 +119,7 @@ const logEntriesData: LogEntry[] = [
     grams: 4567,
     date: dayjs(),
     logged: true,
-    userId: '101',
+    userId: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
     scene: "Test Test"
   },
 
@@ -131,13 +129,13 @@ const logEntriesData: LogEntry[] = [
     grams: 1000,
     date: dayjs("2023-07-01"),
     logged: true,
-    userId: '101',
+    userId: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
     scene: "Test Test"
   },
 ]
 const userData: User = {
   userName: "Hans",
-  id: '101',
+  id: 'HVH3HokG1IOf94IaRUXEj7AkRjW2',
   sceneList: ["Slick Dep 2023", "Test Test"]
 }
 const strains: Array<string> = [
@@ -151,12 +149,12 @@ function App() {
   const[user] = useState(userData)
   const[selectedBottom, setSelectedBottom] = useState('')
   const[logEntries, dispatchLogEntries] = useReducer(logEntryReducer, logEntriesData)
-
- 
-
+  const {currentUser} = useAuth()
+  console.log(currentUser)
+  
   return (
     <>
-    <AuthProvider>
+   
     <LogContext.Provider value={logEntries}>
       <LogDispatchContext.Provider value={dispatchLogEntries}>
         <ThemeProvider theme={theme}>
@@ -171,28 +169,30 @@ function App() {
           
           
             
-            <BottomNavigation
-              id="bottomNav"
-              sx={{ position: 'fixed', bottom: 0, width: 1.0, }}
-              showLabels
-              value={selectedBottom}
-              color='secondary'
-              onChange={(event, newValue) => {
-                setSelectedBottom(newValue);
-              }}>
-              
-              
-                  <BottomNavigationAction component={RouterLink}  to="/user" value="/user" label="User" icon={<AccountCircleOutlined />} />
-                  <BottomNavigationAction component={RouterLink}  to="/addentry" value="/addentry" label="Add Entry" icon={<Add/>} />
-                  <BottomNavigationAction component={RouterLink}  to="/entries" value="/entries" label="Entries" icon={<DocumentScanner />} />
-              
-            </BottomNavigation>
+              {currentUser && <BottomNavigation
+                  id="bottomNav"
+                  className='hidden'
+                  sx={{position: 'fixed', bottom: 0, width: 1.0,}}
+                  showLabels
+                  value={selectedBottom}
+                  color='secondary'
+                  onChange={(event, newValue) => {
+                    setSelectedBottom(newValue);
+                  }}>
+                  
+                  
+                      <BottomNavigationAction component={RouterLink}  to="/user" value="/user" label="User" icon={<AccountCircleOutlined />} />
+                      <BottomNavigationAction component={RouterLink}  to="/addentry" value="/addentry" label="Add Entry" icon={<Add/>} />
+                      <BottomNavigationAction component={RouterLink}  to="/entries" value="/entries" label="Entries" icon={<DocumentScanner />} />
+                  
+                </BottomNavigation>
+            }   
             </BrowserRouter>
             </LocalizationProvider>
         </ThemeProvider>
       </LogDispatchContext.Provider>
     </LogContext.Provider>
-    </AuthProvider>
+   
     </>
   
   )

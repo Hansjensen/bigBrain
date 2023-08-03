@@ -1,17 +1,21 @@
 import React, {useContext, useEffect, useState, createContext} from 'react'
 import { onAuthStateChanged, signInWithEmailAndPassword, getAuth, signOut} from 'firebase/auth'
 import app from '../firebase.ts'
-import { Navigate } from 'react-router-dom'
-const AuthContext = createContext('')
+import { FirebaseAuth } from '../types/interfaces.ts'
+
+
+export const AuthContext = createContext<FirebaseAuth>('')
 
 export function useAuth() {
     return useContext(AuthContext)
 }
 
-export function AuthProvider(props: {children: any}) {
+export function AuthProvider({children}: any) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
-    const {children}  = props
+
+
+    console.log(currentUser)
 
 
     function login(email: string, password: string) {
@@ -26,16 +30,20 @@ export function AuthProvider(props: {children: any}) {
 
     }
     useEffect(()=> {
-        const unsubscribe = onAuthStateChanged(getAuth(app), (user)=> {
+        const unsubscribe = onAuthStateChanged(getAuth(), (guy)=> {
             
-            if (user) {
+            if (guy) {
+            
+            setCurrentUser(guy)
             setLoading(false)
-            setCurrentUser(user)
-            console.log(user)
+            
+            
             } else {
-                console.log('no user')
+                setCurrentUser(guy)
+                setLoading(false)
             }
     }) 
+        
 
         return unsubscribe
     }, [])
@@ -46,10 +54,10 @@ export function AuthProvider(props: {children: any}) {
         login,
         logout
     }
-
+    console.log(value)
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 

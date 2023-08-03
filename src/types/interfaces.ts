@@ -31,3 +31,10 @@ export interface ComponentProps {
     dispatch: Dispatch<{ type: string }>
   }
 
+export interface FirebaseAuth {
+    
+        currentUser: any,
+        login: any, 
+        logout: any
+    
+}
